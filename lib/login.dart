@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage>{
                 RaisedButton(
                   child: Text('Siguiente'),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeCine()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>CineHome()));
                   },
                 ),
               ],
