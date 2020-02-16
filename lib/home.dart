@@ -8,15 +8,97 @@ class CineHome extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey,
         title: Text('CineLoj',
         style: TextStyle(color: Colors.white),),
       ),
       backgroundColor: Colors.black,
-      body: ImageCarousel(),
-    ) ;
-  }
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            ImageCarousel(),
+            _BuildCards(),
+           // _button()
+          ],
+        ),
+      )
 
+    );
+
+  }
+  
+ /**
+   * Witget de boton
+   */
+  Widget _button (){
+    return Center(
+       child: Padding(
+            padding: EdgeInsets.all(100.0),
+            child: SizedBox.fromSize(
+              size: Size(56, 56), // button width and height
+              child: ClipOval(
+                child: Material(
+                  color: Colors.lightBlue, // button color
+                  child: InkWell(
+                    splashColor: Colors.green, // splash color
+                    onTap: () {}, // button pressed
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.shopping_cart), // icon
+                        Text("Reserv"), // text
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+       ),
+    );
+  }
+  Widget _BuildCards(){
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const ListTile(
+                leading: Icon(Icons.local_movies),
+                title: Text('Ejemplo de Texto'),
+                subtitle: Text('Este es el Subtitulo'),
+
+              ),
+              ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: const Text('Reserver Ticket'),
+                    onPressed: (){
+
+                    },
+                  ),
+                  FlatButton(
+                    child:  const Text('Lista'),
+                    onPressed: (){
+
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    
+  }
 }
+
+
+
+
+
 
 //metodo para agregar el carrusel de las imagenes
 class ImageCarousel extends StatelessWidget{
@@ -35,7 +117,7 @@ class ImageCarousel extends StatelessWidget{
 
 
 
-
+//witget del carrucel
   @override
   Widget build(BuildContext context) {
     double screemHeight = MediaQuery.of(context).size.height;
@@ -48,7 +130,7 @@ class ImageCarousel extends StatelessWidget{
           child: Stack(
             children: <Widget>[
               carousel,
-              banner()
+              banner(),
             ],
           )
         ),
@@ -56,8 +138,10 @@ class ImageCarousel extends StatelessWidget{
     );
   }
 
+
 }
 
+//witget del banner interno
 class banner extends StatefulWidget {
   @override
   _bannerState createState() => _bannerState();
