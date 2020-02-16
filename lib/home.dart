@@ -5,55 +5,91 @@ class CineHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MyBodyPage();
+  }
+}
+/**
+ * Clase body para crear listas
+ */
+class MyBodyPage extends StatefulWidget{
+  @override
+  StateMyBodyPage createState() => StateMyBodyPage();
 
+}
+
+class StateMyBodyPage extends State<MyBodyPage>{
+  ScrollController _controller;
+  double bakgroundHeight = 180.0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        title: Text('CineLoj',
-        style: TextStyle(color: Colors.white),),
+        elevation: 0.0,
+        centerTitle: false,
       ),
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            ImageCarousel(),
-            _BuildCards(),
-           // _button()
-          ],
-        ),
-      )
-
+      body: _body(),
     );
-
   }
-  
- /**
+    Widget _body(){
+    return Stack(
+      children: <Widget>[
+        Container(
+          width: double.infinity,
+          height: bakgroundHeight,
+          color: Colors.grey,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.0 ),
+          child: ListView(
+            controller: _controller,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 8.0,bottom: 16.0),
+
+              ),
+              ImageCarousel(),
+              _BuildCards(),
+              _Item('Marvel', 'assets/imagen.jpg'),
+              _Item('Huason', 'assets/peli1.jpg'),
+              _Item('Quin Poemix', 'assets/peli2.jpg'),
+
+            ],
+          ),
+        )
+
+      ],
+    );
+  }
+
+  /**
    * Witget de boton
    */
   Widget _button (){
     return Center(
-       child: Padding(
-            padding: EdgeInsets.all(100.0),
-            child: SizedBox.fromSize(
-              size: Size(56, 56), // button width and height
-              child: ClipOval(
-                child: Material(
-                  color: Colors.lightBlue, // button color
-                  child: InkWell(
-                    splashColor: Colors.green, // splash color
-                    onTap: () {}, // button pressed
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(Icons.shopping_cart), // icon
-                        Text("Reserv"), // text
-                      ],
-                    ),
+      child: Padding(
+          padding: EdgeInsets.all(100.0),
+          child: SizedBox.fromSize(
+            size: Size(56, 56), // button width and height
+            child: ClipOval(
+              child: Material(
+                color: Colors.lightBlue, // button color
+                child: InkWell(
+                  splashColor: Colors.green, // splash color
+                  onTap: () {}, // button pressed
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.shopping_cart), // icon
+                      Text("Reserv"), // text
+                    ],
                   ),
                 ),
               ),
-            )
-       ),
+            ),
+          )
+      ),
     );
   }
   Widget _BuildCards(){
@@ -91,14 +127,91 @@ class CineHome extends StatelessWidget {
         ),
       ),
     );
-    
+  }
+/**
+ * Items para llamar imagenes
+ */
+  Widget _Item(String name, String imagenes){
+
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: IntrinsicHeight(
+          child: Row(
+            children: <Widget>[
+              //para que se vaya a la derecha las imagenes Expanded
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        //container para hacer circulo en la izquierda de la imagen
+                        Container(
+                          width: 42.0,
+                          height: 42.0,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(21.0),
+                              color: Color(0xff363cb0)
+                          ),
+                          child: Center(
+                            child: Text(
+                              //texto va aser la primera letra del nombre
+                              name[0],
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 18.0),
+                        Text(name,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(height: 18.0),
+                    Text('Symbol desing system tutorial - Part 1'),
+                    Text('Discover  things of this world'),
+                    ButtonBar(
+                      children: <Widget>[
+                        FlatButton(
+                          child: const Icon(Icons.shopping_cart),
+
+                          onPressed: (){
+
+                          },
+                        ),
+                      ],
+                    )
+
+                  ],
+                ),
+
+              ),
+              SizedBox(width: 16.0),
+              Container(
+                width: 120.0,
+                height: 120.0,
+                child: Image(
+                  image: AssetImage(imagenes),
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+            ],
+          ),
+        )
+
+    );
+
   }
 }
-
-
-
-
-
 
 //metodo para agregar el carrusel de las imagenes
 class ImageCarousel extends StatelessWidget{
