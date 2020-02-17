@@ -5,13 +5,19 @@ class CineHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyBodyPage();
+    return  MyBodyPage(title: 'Cineloj');
+
   }
 }
 /**
  * Clase body para crear listas
  */
 class MyBodyPage extends StatefulWidget{
+
+  MyBodyPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
   @override
   StateMyBodyPage createState() => StateMyBodyPage();
 
@@ -24,10 +30,22 @@ class StateMyBodyPage extends State<MyBodyPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.grey,
         elevation: 0.0,
         centerTitle: false,
+        title: Padding(
+          padding: EdgeInsets.only(left: 32.0),
+          child: Text(
+            widget.title,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 30.0
+            ),
+          ),
+        ),
+
       ),
       body: _body(),
     );
@@ -47,10 +65,25 @@ class StateMyBodyPage extends State<MyBodyPage>{
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 8.0,bottom: 16.0),
-
+                child: TextField(
+                  //PARA BUSCAR LA LSTA Y CAMBIAR EL VALOR
+                  onChanged: (val) {
+                    
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 25.0),
+                    hintText: 'Search ',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: null,
+                    ),
+                  ),
+                ),
               ),
               ImageCarousel(),
-              _BuildCards(),
               _Item('Marvel', 'assets/imagen.jpg'),
               _Item('Huason', 'assets/peli1.jpg'),
               _Item('Quin Poemix', 'assets/peli2.jpg'),
@@ -92,42 +125,7 @@ class StateMyBodyPage extends State<MyBodyPage>{
       ),
     );
   }
-  Widget _BuildCards(){
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const ListTile(
-                leading: Icon(Icons.local_movies),
-                title: Text('Ejemplo de Texto'),
-                subtitle: Text('Este es el Subtitulo'),
 
-              ),
-              ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                    child: const Text('Reserver Ticket'),
-                    onPressed: (){
-
-                    },
-                  ),
-                  FlatButton(
-                    child:  const Text('Lista'),
-                    onPressed: (){
-
-                    },
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 /**
  * Items para llamar imagenes
  */
@@ -182,10 +180,10 @@ class StateMyBodyPage extends State<MyBodyPage>{
                       children: <Widget>[
                         FlatButton(
                           child: const Icon(Icons.shopping_cart),
-
                           onPressed: (){
-
+                              print('Reservaste pelicula');
                           },
+
                         ),
                       ],
                     )
