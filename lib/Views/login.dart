@@ -11,6 +11,11 @@ class _LoginPageState extends State<LoginPage>{
   //agregamos dos variables TextEditingControllers para poder limbiar las cajas de texto
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  //variables para mostrar contrasenia
+  bool _obscureText = true;
+  String _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +33,20 @@ class _LoginPageState extends State<LoginPage>{
               ],
             ),
             SizedBox(height: 120.0),
+            TextFormField(
+              controller: _userNameController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                labelText: 'Username',
+              ),
+              validator: (value) {
+                if (value.isEmpty || value.contains('@')) {
+                  return 'El campo esta vacio o contiene caracteres invalidos';
+                }
+              },
+            ),
             //label para el usuario
-            TextField(
+            /*TextField(
               //se llama a las variables creadas
               controller: _userNameController,
               //Las clases TextField y InputDecorator usan objetos InputDecoration para describir su decoración. (De hecho, esta clase es simplemente la configuración de un InputDecorator , que hace todos el trabajo pesado)
@@ -37,11 +54,11 @@ class _LoginPageState extends State<LoginPage>{
                 filled: true,
                 labelText: 'Username',
               ),
-            ),
+            ),*/
             //tamanio del cuadro
             SizedBox(height: 12.0),
             //para la contrasenia
-            TextField(
+            /*TextField(
               //se llama a las variables creadas
               controller: _passwordController,
               decoration: InputDecoration(
@@ -49,8 +66,36 @@ class _LoginPageState extends State<LoginPage>{
                   filled: true,
                   labelText: 'Password'
               ),
+
               //obscureText: truereemplaza automáticamente la entrada que el usuario escribe con viñetas, lo cual es apropiado para las contraseñas.
               obscureText: true,
+            ),*/
+            TextFormField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.lock),
+                labelText: 'Password',
+                suffixIcon: GestureDetector(
+                  onLongPress: () {
+                    setState(() {
+                      _obscureText = true;
+                    });
+                  },
+                  onLongPressUp: () {
+                    setState(() {
+                      _obscureText = false;
+                    });
+                  },
+                  child: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off),
+                ),
+              ),
+
+              validator: (value) => value.length < 6 ? 'La contrasenia es muy pequenia.' : null,
+              onSaved: (value) => _password = value,
+              obscureText: _obscureText,
+
+
             ),
             //para crear botones
             ButtonBar(

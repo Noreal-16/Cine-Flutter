@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:get_it/get_it.dart';
+import 'Servicios/movieService.dart';
+import 'Views/login.dart';
 
-void main() => runApp(MyApp());
+void setupMovie(){
+  GetIt.I.registerLazySingleton(() => MovieService());
+}
+
+void main() {
+  setupMovie();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
