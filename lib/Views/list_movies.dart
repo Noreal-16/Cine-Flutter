@@ -5,6 +5,8 @@ import 'package:cineloj_v1/models/list_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import 'movie_ticket.dart';
+
 const AppbarColor = Color(0xFF303F9F);
 const CardColor = Color(0xFF9FA8DA);
 
@@ -129,6 +131,7 @@ class _MovieListState extends State<MovieList> {
                             ),
                             trailing: Icon(Icons.movie, size: 40),
                             onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MovieScreen(movieId: _apiResponse.data[index].id)));
                               //Navigator.of(context).push(MaterialPageRoute(builder: (_)=> NoteModify(noteID: _apiResponse.data[index].noteID,)));
                             },
                           ),

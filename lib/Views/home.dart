@@ -17,10 +17,7 @@ class CineHome extends StatelessWidget{
     animationCurve: Curves.fastOutSlowIn,
     animationDuration: Duration(milliseconds: 2000),
   );
-
-
-
-
+    bool clickedCenterFAB = false;
   @override
   Widget build(BuildContext context) {
     const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
@@ -121,12 +118,42 @@ class CineHome extends StatelessWidget{
         ],
         //child:
       ),
+      /*floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: (){
-
+       onPressed: (){
+          clickedCenterFAB = !clickedCenterFAB;
         },
+        tooltip: "Center",
+       child: Container(
+         margin: EdgeInsets.all(15.0),
+         child: Icon(Icons.add),
+       ),
+        elevation: 4.0,
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          margin: EdgeInsets.only(left: 12.0, right: 12.0),
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              IconButton(
+              //update the bottom app bar view each time an item is clicked
+              onPressed: () {
+        //updateTabSelection(0, "Home");
+        },
+          iconSize: 27.0,
+          icon: Icon(
+            Icons.home,
+            //darken the icon if it is selected or else give it a different color
+
+          ),
+          ),
+        ]
+        ),
+    ),
+
+      ),*/
     );
   }
 }

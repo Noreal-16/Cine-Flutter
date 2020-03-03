@@ -127,7 +127,7 @@ class StateFormulario extends State<Formulario> {
                     onSaved: (value) => _password = value,
                     obscureText: _obscureText,
                   ),
-                  TextFormField(
+                 /* TextFormField(
                     decoration: InputDecoration(
                       icon: Icon(Icons.lock),
                       labelText: 'Repita su Cotraseña',
@@ -152,7 +152,7 @@ class StateFormulario extends State<Formulario> {
                     obscureText: _obscureText,
 
 
-                  ),
+                  ),*/
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Center(
