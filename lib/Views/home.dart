@@ -98,20 +98,6 @@ class CineHome extends StatelessWidget{
         backgroundColor: Colors.grey,
         elevation: 0.0,
         title: Text('CineLoj'),
-        /*actions: <Widget>[
-          InkWell(
-            child: Icon(Icons.search),
-            onTap: (){
-              print('object');
-            },
-          ),
-          InkWell(
-            child: Icon(Icons.more_vert),
-            onTap: (){
-
-            },
-          ),
-        ],*/
       ),
       body: Column(
         children: <Widget>[
@@ -121,7 +107,7 @@ class CineHome extends StatelessWidget{
             color: Colors.grey,
             child: Container(
               padding: EdgeInsets.all(20.0),
-              height: 180/2,
+              height: 150/2,
               child: new ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Stack(
@@ -132,7 +118,7 @@ class CineHome extends StatelessWidget{
               ),
             ),
           ),
-          SizedBox(height: 30.0),
+          SizedBox(height: 5.0),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -148,7 +134,6 @@ class CineHome extends StatelessWidget{
       ),
     );
   }
-
   Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -189,7 +174,7 @@ Widget titleSection = Container(
                 'CineLoj ',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22
+                  fontSize: 15
                 ),
               ),
             ),
