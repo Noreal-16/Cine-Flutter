@@ -3,6 +3,8 @@ import 'package:cineloj_v1/Views/list_movies.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'Reservas.dart';
+
 class CineHome extends StatelessWidget{
   double bakgroundHeight = 300.0;
   //se puede agregar un withget a una variable
@@ -44,7 +46,7 @@ class CineHome extends StatelessWidget{
               accountName: const Text('ALEX NOLE'),
               accountEmail: const Text('alex.nole@unl.edu.ec'),
               currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage('assets/login_icon.png',
+                backgroundImage: AssetImage('assets/registro.png',
                 ),
               ),
             ),
@@ -52,9 +54,17 @@ class CineHome extends StatelessWidget{
               children: <Widget>[
                 Card(
                   child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: AssetImage('assets/movie.jpg'),
-                    ),
+                    leading: Icon(Icons.person, color: Colors.blueAccent,),
+                    title: Text('Perfil'),
+                    onTap: (){
+
+                    },
+                  ),
+                ),
+                SizedBox(height: 8.0,),
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.movie, color: Colors.redAccent,),
                     title: Text('Peliculas'),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MovieList()));
@@ -64,14 +74,16 @@ class CineHome extends StatelessWidget{
                 SizedBox(height: 8.0),
                 Card(
                   child: ListTile(
-                    leading: Icon(Icons.shopping_cart),
-                    title: Text('Item 2'),
+                    leading: Icon(Icons.shopping_cart,color: Colors.green,),
+                    title: Text('Compras'),
                     onTap: (){
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=> ShoppingCartTab()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ReservationMovie()));
 
                     },
                   ),
-                )
+                ),
+                SizedBox(height: 8.0),
+
               ],
 
             ),

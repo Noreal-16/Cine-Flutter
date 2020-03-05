@@ -83,10 +83,10 @@ class _MovieScreenState extends State<MovieScreen> {
                 },
                 icon: Icon(Icons.shopping_cart),
               ),
-              IconButton(
+              /*IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.info),
-              ),
+              ),*/
 
             ],
           ),

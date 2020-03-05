@@ -1,4 +1,5 @@
 import 'package:cineloj_v1/Views/list_movies.dart';
+import 'package:cineloj_v1/pages/checkoutPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -71,7 +72,9 @@ class _TicketDetalleState extends State<TicketDetalle> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.shopping_cart),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> CheckoutPage()));
+        },
       ),
       body: _body(),
     );
