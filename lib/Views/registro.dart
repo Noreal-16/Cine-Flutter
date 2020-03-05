@@ -31,14 +31,14 @@ class RegistroUsuario extends StatelessWidget{
           ),
         )
       ),
-        floatingActionButton: FloatingActionButton(
+       /* floatingActionButton: FloatingActionButton(
            onPressed: (){
 
             },
           tooltip: 'Help',
           child: Icon(Icons.help),
 
-    ),
+    ),*/
     );
   }
 }

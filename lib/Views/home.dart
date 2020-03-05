@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cineloj_v1/Views/list_movies.dart';
+import 'package:cineloj_v1/Views/user.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,7 @@ class CineHome extends StatelessWidget{
                     leading: Icon(Icons.person, color: Colors.blueAccent,),
                     title: Text('Perfil'),
                     onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> FormularioUsuario()));
 
                     },
                   ),
