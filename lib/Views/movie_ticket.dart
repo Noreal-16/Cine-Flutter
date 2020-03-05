@@ -1,4 +1,5 @@
 import 'package:cineloj_v1/Servicios/movieService.dart';
+import 'package:cineloj_v1/Views/ticket_detalle.dart';
 import 'package:cineloj_v1/models/movie_consulta.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -49,9 +50,9 @@ class _MovieScreenState extends State<MovieScreen> {
         if(response.error){
           errorMessage = response.errorMessage ?? 'A ocurrido un error';
           }
-        _nameController.text = movie.Name;
-        _generoController.text = movie.Genus;
-        _descriptionController.text = movie.Description;
+        //_nameController.text = movie.Name;
+        //_generoController.text = movie.Genus;
+        //_descriptionController.text = movie.Description;
       });
     }
   }
@@ -59,6 +60,7 @@ class _MovieScreenState extends State<MovieScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
           backgroundColor: AppbarColor,
           title: Text('Cineloj'),
@@ -76,7 +78,9 @@ class _MovieScreenState extends State<MovieScreen> {
                 icon: Icon(Icons.home),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TicketDetalle()));
+                },
                 icon: Icon(Icons.shopping_cart),
               ),
               IconButton(
@@ -102,20 +106,20 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    TextField(
-                      controller: _nameController,
+                    /*TextField(
+                      //controller: _nameController,
                       decoration: InputDecoration(
                         //hintText: 'Movie Name'
                       ),
-                    ),
-                    /*Text(
+                    ),*/
+                    Text(
                       'It',
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
-                    ),*/
+                    ),
                     SizedBox(height: 10.0),
                     Text(
                       'Terror',
@@ -261,7 +265,11 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget _buildStack() => Stack(
     alignment: const Alignment(0.6, 0.6),
     children: [
-      Image.asset('assets/it.jpg'),
+      ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: Image.asset('assets/it.jpg'),
+      ),
+
       Container(
         decoration: BoxDecoration(
           color: Colors.black45,
@@ -271,4 +279,7 @@ class _MovieScreenState extends State<MovieScreen> {
     ],
   );
 }
+
+
+
 

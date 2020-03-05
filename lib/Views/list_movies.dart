@@ -63,91 +63,140 @@ class _MovieListState extends State<MovieList> {
         centerTitle: false,
         title: Padding(
           padding: EdgeInsets.only(left: 32.0),
-          child: Text('CineLoj'),
+          child: Column(
+
+            children: <Widget>[
+              Text('CineLoj'),
+            ],
+          ),
         ),
       ),
-      body: Builder(
-        builder: (context) {
-          if(_isLoading){
-            return Center(
-              child: CircularProgressIndicator(),);
-          }
-          if(_apiResponse.error){
-            return Center(child: Text(_apiResponse.errorMessage));
-          }
-          return ListView.separated(
-              separatorBuilder: (_, __)=> Divider(height: 1, color: Colors.transparent),
-              itemBuilder: (_, index){
-                /**
-                 *Seccin para poder hacer un slash para eliminar un regstro
-                 */
-                return Dismissible(
-                  key: ValueKey(_apiResponse.data[index].id),
-                  direction: DismissDirection.startToEnd,
-                  onDismissed: (direction){
+      body:  Stack(
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 280/2,
+              color: AppbarColor,
 
-                  },
-                  confirmDismiss: (direction) async{
-                    final result = await showDialog(
-                      context: context,
-                      //builder: (_)=> NoteDelete()//se llama al widget para llamar a la confirmacion
-                    );
-                    print(result);
-                    return result;
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    padding: EdgeInsets.only(left: 16),
-                    child: Align(
-                      child: Icon(Icons.delete, color: Colors.white,),
-                      alignment: Alignment.centerLeft,
-                    ),
+            ),
+            SizedBox(height: 10,),
+             Padding(
+                padding: const EdgeInsets.all(8.0),
+               child: Center(
+                  child:_servicio() ,
+                ),
+              ),
+
+
+          ],
+        ),
+
+
+    );
+  }
+  Widget _servicio(){
+    return  Builder(
+      builder: (context) {
+        if(_isLoading){
+          return Center(
+            child: CircularProgressIndicator(),);
+        }
+        if(_apiResponse.error){
+          return Center(child: Text(_apiResponse.errorMessage));
+        }
+        return ListView.separated(
+            separatorBuilder: (_, __)=> Divider(height: 0, color: Colors.transparent),
+            itemBuilder: (_, index){
+              /**
+               *Seccin para poder hacer un slash para eliminar un regstro
+               */
+              return Dismissible(
+                key: ValueKey(_apiResponse.data[index].id),
+                direction: DismissDirection.startToEnd,
+                onDismissed: (direction){
+
+                },
+                confirmDismiss: (direction) async{
+                  final result = await showDialog(
+                    context: context,
+                    //builder: (_)=> NoteDelete()//se llama al widget para llamar a la confirmacion
+                  );
+                  print(result);
+                  return result;
+                },
+                background: Container(
+                  color: Colors.red,
+                  padding: EdgeInsets.only(left: 16),
+                  child: Align(
+                    child: Icon(Icons.delete, color: Colors.white,),
+                    alignment: Alignment.centerLeft,
                   ),
-                  /**
-                   * list title en donde se mustra la lista de registros
-                   */
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
+                ),
+                /**
+                 * list title en donde se mustra la lista de registros
+                 */
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
-                      ),
-                      color: CardColor,
-                      elevation: 10,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: CircleAvatar(
+                    ),
+                    color: CardColor,
+                    elevation: 10,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+
+                        ListTile(
+                          leading: CircleAvatar(
                               backgroundColor: Colors.white,
                               backgroundImage: AssetImage('assets/cinelog.png')),
 
-                            title: Text(
-                              _apiResponse.data[index].Name,
-                              style: TextStyle(color: Theme.of(context).bottomAppBarColor),
-                            ),
-                            subtitle: Text(
-                                'Last edited on ${formatDateTime(_apiResponse.data[index].DatePremiere)}'
-                            ),
-                            trailing: Icon(Icons.movie, size: 40),
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MovieScreen(movieId: _apiResponse.data[index].id)));
-                              //Navigator.of(context).push(MaterialPageRoute(builder: (_)=> NoteModify(noteID: _apiResponse.data[index].noteID,)));
-                            },
+                          title: Text(
+                            _apiResponse.data[index].Name,
+                            style: TextStyle(color: Theme.of(context).bottomAppBarColor),
                           ),
+                          subtitle: Text(
+                              'Last edited on ${formatDateTime(_apiResponse.data[index].DatePremiere)}'
+                          ),
+                          trailing: Icon(Icons.movie, size: 40),
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_) => MovieScreen(movieId: _apiResponse.data[index].id)));
+                            //Navigator.of(context).push(MaterialPageRoute(builder: (_)=> NoteModify(noteID: _apiResponse.data[index].noteID,)));
+                          },
+                        ),
 
-                        ],
-                      ),
+                      ],
                     ),
                   ),
-                );
-              },
-              itemCount: _apiResponse.data.length);
-        },
-
-      ),
+                ),
+              );
+            },
+            itemCount: _apiResponse.data.length);
+      },
 
     );
   }
 }
 
+Widget _search(){
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: TextField(
+      onChanged: (val) {
+
+      },
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(left: 25.0),
+        hintText: 'Search ',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.search),
+          onPressed: null,
+        ),
+      ),
+    ),
+  );
+}

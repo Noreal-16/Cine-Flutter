@@ -8,23 +8,10 @@ import 'package:http/http.dart' as http;
 
 class MovieService {
 
-  static const APIUrl ='http://192.168.100.27:8000/api--movie-document/';
+  static const APIUrl ='https://cineloj-backend.herokuapp.com/api--movie-document/';
+  //static const APIUrl ='http://192.168.100.27:8000/api--movie-document/';
   static const headers = {'Content-Type': 'application/json'};
 
-  /*Future<APIResponse<List<ListMovie>>> getMovieList() async {
-    final response = await http.get(APIUrl);
-    List jsonResponse = json.decode(response.body);
-    if(response.statusCode == 200){
-      //jsonResponse.forEach((element) => print(element));
-      final jsonData = json.decode(response.body);
-      final jsonList = <ListMovie>[];
-      for(var item in jsonData){
-        jsonList.add(ListMovie.fromJson(item));
-      }
-      return APIResponse<List<ListMovie>>(data: jsonList);
-    }
-    return APIResponse<List<ListMovie>>(error: true, errorMessage: 'a ocuerrudo u error');
-  }*/
   /**
    * Servicio para listar las peliculas disponibles 
    */
@@ -47,7 +34,7 @@ class MovieService {
  * Servicio para enviar a consulta
  */
   Future<APIResponse<MovieConsulta>> getMovie(String movieId){
-    return http.get(APIUrl + movieId).then((data){
+    return http.get(APIUrl + movieId, headers: headers).then((data){
       if(data.statusCode == 200){
         final jsonData = json.decode(data.body);
         return APIResponse<MovieConsulta>(data: MovieConsulta.fromJson(jsonData));

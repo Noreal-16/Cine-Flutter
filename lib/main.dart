@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'Servicios/movieService.dart';
+import 'Servicios/registro_user.dart';
 import 'Views/login.dart';
 
 void setupMovie(){
   GetIt.I.registerLazySingleton(() => MovieService());
+  GetIt.I.registerLazySingleton(()=> RegisterUserCLient());
 }
 
 void main() {
